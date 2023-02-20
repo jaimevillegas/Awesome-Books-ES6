@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+// import * as DateTime from 'luxon';
 import * as dom from './getDomElements.js';
 
 class Book {
@@ -24,14 +26,9 @@ class Book {
   }
 
   showDate() {
-    this.date = new Date();
-    // const date = new Date();
-    const options = {
-      month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true,
-    };
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(this.date).replace(/,/g, '');
-
-    dom.textDate.innerHTML = formattedDate;
+    this.now = DateTime.now();
+    this.now = this.now.toLocaleString(DateTime.DATETIME_MED);
+    dom.textDate.innerHTML = this.now;
   }
 
   updateList() {
