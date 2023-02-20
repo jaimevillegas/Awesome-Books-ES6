@@ -1,3 +1,5 @@
+import * as dom from './getDomElements.js';
+
 class Book {
   constructor(id, name, author) {
     this.id = id;
@@ -10,8 +12,8 @@ class Book {
   addNewBook() {
     Book.books.push(this);
     localStorage.setItem('books', JSON.stringify(Book.books));
-    bookTitle.value = '';
-    bookAuthor.value = '';
+    dom.bookTitle.value = '';
+    dom.bookAuthor.value = '';
     this.updateList();
   }
 
@@ -22,20 +24,21 @@ class Book {
   }
 
   showDate() {
-    const date = new Date();
+    this.date = new Date();
+    // const date = new Date();
     const options = {
       month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true,
     };
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date).replace(/,/g, '');
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(this.date).replace(/,/g, '');
 
-    textDate.innerHTML = formattedDate;
+    dom.textDate.innerHTML = formattedDate;
   }
 
   updateList() {
     this.showDate();
-    SectionBook.innerHTML = '';
+    dom.SectionBook.innerHTML = '';
     Book.books.forEach((book) => {
-      SectionBook.insertAdjacentHTML('beforeend', `
+      dom.SectionBook.insertAdjacentHTML('beforeend', `
       <article class='book-item'>
       <p>${book.name}</p>
       <span> by </span>
