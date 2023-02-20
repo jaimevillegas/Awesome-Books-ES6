@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon';
-// import * as DateTime from 'luxon';
 import * as dom from './getDomElements.js';
 
 class Book {
